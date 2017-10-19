@@ -68,9 +68,16 @@ else
     mkdir wp-content/uploads
     chmod 775 wp-content/uploads
     
+    #set the right permission
+    chown www-data:www-data  -R . # Let Apache be owner
+    find . -type d -exec chmod 755 {} \;  # Change directory permissions rwxr-xr-x
+    find . -type f -exec chmod 644 {} \;  # Change file permissions rw-r--r--
+
     echo "Cleaning..."
+    
     #remove zip file
     rm latest.tar.gz
+    
     #remove bash script
     rm autoinstallwp.sh
     echo "========================="
